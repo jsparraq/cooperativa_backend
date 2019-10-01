@@ -8,7 +8,7 @@ class User extends Error {
 }
 class UserExisting extends User {
   constructor() {
-    super('Existing user', 400);
+    super('There are an user with this email', 400);
     Error.captureStackTrace(this, this.constructor);
   }
 }
