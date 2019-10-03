@@ -44,8 +44,9 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start-dev": "nodemon --inspect src/app.js",
-    "start": "node src/app.js",
+    "start:dev": "nodemon --inspect src/app.js",
+    "start": "node dist/app.js",
+    "build": "webpack --mode development",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
