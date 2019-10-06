@@ -1,6 +1,6 @@
 const dotenv = require('dotenv');
 
-dotenv.config();
+dotenv.config({ silent: process.env.NODE_ENV === 'production' });
 
 module.exports = {
   port: process.env.PORT || 4000,
