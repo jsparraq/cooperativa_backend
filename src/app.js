@@ -4,17 +4,30 @@ const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { handlerError } = require('./errors/handlerErrors');
 
 const app = express();
 
 const { port } = require('./config/config');
 const database = require('./db/DBs');
 
+const errorsLogger = logger('dev', {
+  skip(req, res) {
+    return res.statusCode < 400;
+  },
+});
+
+const dateLogger = logger('[:date]', {
+  skip(req, res) {
+    return res.statusCode < 400;
+  },
+});
+
 app.use(helmet());
 
 app
-  .use(logger('[:date]'))
-  .use(logger('dev'))
+  .use(dateLogger)
+  .use(errorsLogger)
   .use(passport.initialize())
   .use(
     bodyParser.json({
@@ -56,13 +69,16 @@ app.listen(port, function() {
 
 // catch 404 and forward to error handler
 app.use(function(err, _, res, next) {
-  // eslint-disable-next-line no-console
-  console.error(err.stack);
-  if (err.status) {
-    res.status(err.status).json({ error: err.message });
-  } else {
-    res.status(500).json({ error: err.message });
-  }
+  handlerError(err).then(err => {
+    if (err.body.name === null) {
+      // eslint-disable-next-line no-console
+      console.error(err.stack);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(err.body.name);
+    }
+    res.status(err.status).json(err.body);
+  });
 });
 
 module.exports = app;
