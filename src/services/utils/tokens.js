@@ -17,7 +17,8 @@ exports.create = userId => {
 
 exports.verify = async token => {
   try {
-    return await jwt.verify(token, secret);
+    const tokenVerified = jwt.verify(token, secret);
+    return tokenVerified;
   } catch (err) {
     return false;
   }
