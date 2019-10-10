@@ -5,6 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
+const { User } = require('./errors');
 
 const app = express();
 
@@ -70,7 +71,7 @@ app.listen(port, function() {
 // catch 404 and forward to error handler
 app.use(function(err, _, res, next) {
   handlerError(err).then(err => {
-    if (err.body.name === null) {
+    if (err instanceof User) {
       // eslint-disable-next-line no-console
       console.error(err.stack);
     } else {
