@@ -1,16 +1,14 @@
-const { UserExisting } = require('./index');
+const { UserExisting, User } = require('./index');
 
 exports.handlerError = async err => {
   let customError;
-  // eslint-disable-next-line no-console
-  console.log(err);
   if (err.name === 'MongoError') {
     if (err.code === 11000) {
       if (err.message.includes('User')) {
         customError = new UserExisting();
       }
     }
-  } else if (err instanceof Error) {
+  } else if (err instanceof User) {
     customError = err;
   } else {
     return { status: 500, body: { type: 'Error', message: 'Something went wrong. Please try again.', name: 'Error' } };

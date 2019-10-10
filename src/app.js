@@ -12,13 +12,13 @@ const { port } = require('./config/config');
 const database = require('./db/DBs');
 
 const errorsLogger = logger('dev', {
-  skip(req, res) {
+  skip(_, res) {
     return res.statusCode < 400;
   },
 });
 
 const dateLogger = logger('[:date]', {
-  skip(req, res) {
+  skip(_, res) {
     return res.statusCode < 400;
   },
 });

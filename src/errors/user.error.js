@@ -37,7 +37,16 @@ class EmailPassWrong extends User {
   }
 }
 
+class UserAuth extends User {
+  constructor() {
+    super("User id doesn't match token", 401, 'Auth Error');
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
 module.exports = {
   UserExisting,
   EmailPassWrong,
+  UserAuth,
+  User,
 };

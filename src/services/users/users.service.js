@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt-nodejs');
 const { User } = require('../../models');
-const { create } = require('../authentication/token/tokens');
+const { create } = require('../utils/tokens');
 const { EmailPassWrong } = require('../../errors');
 
 exports.createUser = async newUser => {
@@ -33,7 +33,7 @@ exports.login = async user => {
   const loginSuccess = await bcrypt.compareSync(user.password, userLogin.password);
   if (loginSuccess) {
     const token = create(userLogin._id);
-    return { email: user.email, token };
+    return { userId: userLogin._id, token };
   }
   throw new EmailPassWrong();
 };
