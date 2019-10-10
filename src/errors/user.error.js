@@ -30,4 +30,14 @@ class UserExisting extends User {
   }
 }
 
-module.exports = UserExisting;
+class EmailPassWrong extends User {
+  constructor() {
+    super("The credentails you've entered doesn't match any account", 401, 'Request Error');
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+module.exports = {
+  UserExisting,
+  EmailPassWrong,
+};

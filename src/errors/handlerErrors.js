@@ -8,6 +8,8 @@ exports.handlerError = async err => {
         customError = new UserExisting();
       }
     }
+  } else if (err instanceof Error) {
+    customError = err;
   } else {
     return { status: 500, body: { type: 'Error', message: 'Something went wrong. Please try again.', name: 'Error' } };
   }
