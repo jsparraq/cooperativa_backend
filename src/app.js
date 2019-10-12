@@ -13,14 +13,14 @@ const { port } = require('./config/config');
 const database = require('./db/DBs');
 
 const errorsLogger = logger('dev', {
-  skip(_, res) {
-    return res.statusCode < 400;
+  skip(req) {
+    return req.url === '/';
   },
 });
 
 const dateLogger = logger('[:date]', {
-  skip(_, res) {
-    return res.statusCode < 400;
+  skip(req) {
+    return req.url === '/';
   },
 });
 
