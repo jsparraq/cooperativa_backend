@@ -7,4 +7,6 @@ module.exports = function(app) {
 
   app.delete('/deleteUser/:userId', authMiddleware, userController.deleteUser);
   app.get('/getUsers', authMiddleware, userController.getUsers);
+
+  app.get('/validateUser', userController.validateUser);
 };

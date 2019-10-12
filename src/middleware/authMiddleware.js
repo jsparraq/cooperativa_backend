@@ -6,7 +6,7 @@ exports.authMiddleware = async (req, _, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = await verify(token);
     const userId = decodedToken.sub;
-    if (req.body.userId && req.body.userId !== userId) {
+    if (req.headers.userid === undefined && req.headers.userid !== userId) {
       throw new UserAuth();
     } else {
       next();

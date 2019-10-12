@@ -38,3 +38,13 @@ exports.login = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.validateUser = async (req, res, next) => {
+  const headers = qs.parse(req.headers);
+  try {
+    const response = await userServices.validateUser(headers.authorization.split(' ')[1]);
+    res.send(response);
+  } catch (err) {
+    next(err);
+  }
+};
