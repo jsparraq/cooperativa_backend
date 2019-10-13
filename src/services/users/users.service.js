@@ -4,17 +4,6 @@ const { create } = require('../utils/tokens');
 const { EmailPassWrong } = require('../../errors');
 const { verify } = require('../utils/tokens');
 
-exports.createUser = async newUser => {
-  const hashPassword = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
-  const user = new User({
-    email: newUser.email,
-    name: newUser.name,
-    password: hashPassword,
-  });
-  const created = await user.save();
-  return created;
-};
-
 exports.getUsers = async () => {
   const usersProjection = {
     __v: false,

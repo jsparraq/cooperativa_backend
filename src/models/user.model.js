@@ -16,9 +16,18 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
+    role: {
+      type: String,
+      require: true,
+    },
+    accepted: {
+      type: Boolean,
+      require: true,
+    },
   },
   {
     collection: 'User',
+    timestamps: { createdAt: true, updatedAt: true },
   }
 );
 
