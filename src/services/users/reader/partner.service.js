@@ -4,7 +4,6 @@ exports.getPartnersNotAccepted = async () => {
   const usersProjection = {
     __v: false,
     password: false,
-    updatedAt: false,
     role: false,
     accepted: false,
   };

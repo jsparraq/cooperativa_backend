@@ -1,5 +1,11 @@
 const qs = require('qs');
-const { userServices, partnerCreatorService, partnerReaderService } = require('../services/users');
+const {
+  userServices,
+  partnerCreatorService,
+  partnerReaderService,
+  partnerUpdaterService,
+  partnerDeleterService,
+} = require('../services');
 
 exports.createPartner = async (req, res, next) => {
   const newUser = qs.parse(req.body);
@@ -11,7 +17,7 @@ exports.createPartner = async (req, res, next) => {
   }
 };
 
-exports.getPartnersNotAccepted = async (req, res, next) => {
+exports.getPartnersNotAccepted = async (_, res, next) => {
   try {
     const partnersNotAccepted = await partnerReaderService.getPartnersNotAccepted();
     res.json(partnersNotAccepted);
@@ -20,19 +26,21 @@ exports.getPartnersNotAccepted = async (req, res, next) => {
   }
 };
 
-exports.deleteUser = async (req, res, next) => {
+exports.acceptPartner = async (req, res, next) => {
+  const partner = qs.parse(req.body);
   try {
-    const user = await userServices.deleteUser(req.params.userId);
-    res.json(user);
+    const partnersAccepted = await partnerUpdaterService.acceptPartner(partner.userId);
+    res.json(partnersAccepted);
   } catch (err) {
     next(err);
   }
 };
 
-exports.getUsers = async (_, res, next) => {
+exports.denyPartner = async (req, res, next) => {
+  const partner = qs.parse(req.body);
   try {
-    const users = await userServices.getUsers();
-    res.json(users);
+    const partnersDeny = await partnerDeleterService.denyPartner(partner.userId);
+    res.json(partnersDeny);
   } catch (err) {
     next(err);
   }

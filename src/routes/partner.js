@@ -5,5 +5,7 @@ const { authMiddleware, adminMiddleware } = require('../middleware');
 
 partner.post('/createPartner', userController.createPartner);
 partner.get('/getPartnersNotAccepted', [authMiddleware, adminMiddleware], userController.getPartnersNotAccepted);
+partner.post('/acceptPartner', [authMiddleware, adminMiddleware], userController.acceptPartner);
+partner.post('/denyPartner', [authMiddleware, adminMiddleware], userController.denyPartner);
 
 module.exports = partner;

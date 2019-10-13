@@ -4,25 +4,10 @@ const { create } = require('../utils/tokens');
 const { EmailPassWrong } = require('../../errors');
 const { verify } = require('../utils/tokens');
 
-exports.getUsers = async () => {
-  const usersProjection = {
-    __v: false,
-    password: false,
-  };
-  const users = await User.find({}, usersProjection);
-  return users;
-};
-
-exports.deleteUser = async id => {
-  const user = await User.findByIdAndRemove(id);
-  return user;
-};
-
 exports.login = async user => {
   const usersProjection = {
     __v: false,
     createdAt: false,
-    updatedAt: false,
   };
   const userLogin = await User.findOne({ email: user.email }, usersProjection).then(userMongo => userMongo.toJSON());
   const loginSuccess = await bcrypt.compareSync(user.password, userLogin.password);

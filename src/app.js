@@ -6,7 +6,6 @@ const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
 
 // Routes
-const routes = require('./routes/users');
 const partnerRoutes = require('./routes/partner');
 const authRoutes = require('./routes/auth');
 
@@ -59,7 +58,6 @@ database
     console.error(err);
   });
 
-app.use(routes);
 app.use(partnerRoutes);
 app.use(authRoutes);
 
