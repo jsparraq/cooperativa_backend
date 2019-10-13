@@ -17,13 +17,13 @@ const database = require('./db/DBs');
 
 const errorsLogger = logger('dev', {
   skip(req) {
-    return req.url === '/';
+    return req.url === '/' || req.url === '/validateUser';
   },
 });
 
 const dateLogger = logger('[:date]', {
   skip(req) {
-    return req.url === '/';
+    return req.url === '/' || req.url === '/validateUser';
   },
 });
 

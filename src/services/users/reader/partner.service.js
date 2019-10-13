@@ -5,6 +5,8 @@ exports.getPartnersNotAccepted = async () => {
     __v: false,
     password: false,
     updatedAt: false,
+    role: false,
+    accepted: false,
   };
   const partnersNotAccepted = await User.find({ accepted: false, role: 'Partner' }, usersProjection);
   return partnersNotAccepted;
