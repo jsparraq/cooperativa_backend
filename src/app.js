@@ -65,8 +65,9 @@ app.get('/', function(_, res) {
 });
 
 app.listen(port, function() {
+  const currentDate = new Date();
   // eslint-disable-next-line no-console
-  console.log(`Cooperativa backend app listening on port ${port}!`);
+  console.log(`Cooperativa backend app listening on port ${port}! ${currentDate.toLocaleString()}`);
 });
 
 // catch 404 and forward to error handler
