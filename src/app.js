@@ -6,8 +6,7 @@ const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
 
 // Routes
-const partnerRoutes = require('./routes/partner');
-const authRoutes = require('./routes/auth');
+const { authRoutes, partnerRoutes } = require('./routes');
 
 const app = express();
 
