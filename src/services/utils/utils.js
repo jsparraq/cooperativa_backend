@@ -1,4 +1,5 @@
 const nodeMailer = require('nodemailer');
+const { emailPassword, email } = require('../../config/config');
 
 const acceptPartnerTemplate = {
   subject: 'Tu has sido aceptado',
@@ -10,11 +11,11 @@ const denyPartnerTemplate = {
   html: '<b>Tu has sido rechazado a la cooperativa</b>',
 };
 
-exports.requestPartner = async (email, accept) => {
+exports.requestPartner = async (toEmail, accept) => {
   if (accept) {
-    return this.sendEmail({ ...acceptPartnerTemplate, to: email });
+    return this.sendEmail({ ...acceptPartnerTemplate, to: toEmail });
   }
-  return this.sendEmail({ ...denyPartnerTemplate, to: email });
+  return this.sendEmail({ ...denyPartnerTemplate, to: toEmail });
 };
 
 exports.sendEmail = async mailOptions => {
@@ -23,10 +24,10 @@ exports.sendEmail = async mailOptions => {
     port: 465,
     secure: true,
     auth: {
-      user: 'cooperativa.phoenix20@gmail.com',
-      pass: '!Ec%yAQ=HDRRVj3F',
+      user: email,
+      pass: emailPassword,
     },
   });
-  mailOptions.from = 'cooperativa.phoenix20@gmail.com';
+  mailOptions.from = email;
   return transporter.sendMail(mailOptions);
 };
