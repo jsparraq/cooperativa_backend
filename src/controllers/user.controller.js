@@ -1,11 +1,20 @@
 const qs = require('qs');
-const { userServices, partnerCreatorService } = require('../services/users');
+const { userServices, partnerCreatorService, partnerReaderService } = require('../services/users');
 
 exports.createPartner = async (req, res, next) => {
   const newUser = qs.parse(req.body);
   try {
     const user = await partnerCreatorService.createPartner(newUser);
     res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getPartnersNotAccepted = async (req, res, next) => {
+  try {
+    const partnersNotAccepted = await partnerReaderService.getPartnersNotAccepted();
+    res.json(partnersNotAccepted);
   } catch (err) {
     next(err);
   }

@@ -1,3 +1,3 @@
-const { UserExisting, EmailPassWrong, UserAuth, User } = require('./user.error');
+const { UserExisting, EmailPassWrong, UserAuth, User, UserRole } = require('./user.error');
 
-module.exports = { UserExisting, EmailPassWrong, UserAuth, User };
+module.exports = { UserExisting, EmailPassWrong, UserAuth, User, UserRole };

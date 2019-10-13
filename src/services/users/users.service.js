@@ -21,8 +21,10 @@ exports.deleteUser = async id => {
 exports.login = async user => {
   const usersProjection = {
     __v: false,
+    createdAt: false,
+    updatedAt: false,
   };
-  const userLogin = await User.findOne({ email: user.email }, usersProjection);
+  const userLogin = await User.findOne({ email: user.email }, usersProjection).then(userMongo => userMongo.toJSON());
   const loginSuccess = await bcrypt.compareSync(user.password, userLogin.password);
   if (loginSuccess) {
     delete userLogin.password;

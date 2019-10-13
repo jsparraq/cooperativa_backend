@@ -44,9 +44,17 @@ class UserAuth extends User {
   }
 }
 
+class UserRole extends User {
+  constructor() {
+    super("You don't have permissions for this operation", 401, 'Permissions Error');
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
 module.exports = {
   UserExisting,
   EmailPassWrong,
   UserAuth,
   User,
+  UserRole,
 };

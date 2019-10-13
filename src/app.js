@@ -1,11 +1,14 @@
 const express = require('express');
 const helmet = require('helmet');
 const logger = require('morgan');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
-const { User } = require('./errors');
+
+// Routes
+const routes = require('./routes/users');
+const partnerRoutes = require('./routes/partner');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -29,7 +32,6 @@ app.use(helmet());
 app
   .use(dateLogger)
   .use(errorsLogger)
-  .use(passport.initialize())
   .use(
     bodyParser.json({
       limit: '50mb',
@@ -57,7 +59,9 @@ database
     console.error(err);
   });
 
-require('./routes/routes')(app);
+app.use(routes);
+app.use(partnerRoutes);
+app.use(authRoutes);
 
 app.get('/', function(_, res) {
   res.send('Hello this is the Cooperativa backend');
@@ -71,13 +75,6 @@ app.listen(port, function() {
 // catch 404 and forward to error handler
 app.use(function(err, _, res, next) {
   handlerError(err).then(err => {
-    if (err instanceof User) {
-      // eslint-disable-next-line no-console
-      console.error(err.stack);
-    } else {
-      // eslint-disable-next-line no-console
-      console.error(err.body.name);
-    }
     res.status(err.status).json(err.body);
   });
 });
