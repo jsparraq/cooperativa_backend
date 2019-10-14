@@ -13,7 +13,7 @@ exports.createPartner = async (req, res, next) => {
   const newUser = qs.parse(req.body);
   try {
     const user = await partnerCreatorService.createPartner(newUser);
-    res.json(user);
+    res.send(user);
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ exports.createPartner = async (req, res, next) => {
 exports.getPartnersNotAccepted = async (_, res, next) => {
   try {
     const partnersNotAccepted = await partnerReaderService.getPartnersNotAccepted();
-    res.json(partnersNotAccepted);
+    res.send(partnersNotAccepted);
   } catch (err) {
     next(err);
   }
@@ -32,7 +32,7 @@ exports.acceptPartner = async (req, res, next) => {
   const partner = qs.parse(req.body);
   try {
     const partnersAccepted = await partnerUpdaterService.acceptPartner(partner.userId);
-    res.json(partnersAccepted);
+    res.send(partnersAccepted);
   } catch (err) {
     next(err);
   }
@@ -42,7 +42,7 @@ exports.denyPartner = async (req, res, next) => {
   const partner = qs.parse(req.body);
   try {
     const partnersDeny = await partnerDeleterService.denyPartner(partner.userId);
-    res.json(partnersDeny);
+    res.send(partnersDeny);
   } catch (err) {
     next(err);
   }

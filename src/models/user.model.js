@@ -27,7 +27,7 @@ const userSchema = new Schema(
   },
   {
     collection: 'User',
-    timestamps: { createdAt: true },
+    timestamps: { createdAt: true, updatedAt: false },
   }
 );
 

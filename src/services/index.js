@@ -5,6 +5,8 @@ const {
   partnerUpdaterService,
   partnerDeleterService,
 } = require('./users');
+
+const newsService = require('./news');
 const utils = require('./utils/utils');
 
 module.exports = {
@@ -14,4 +16,5 @@ module.exports = {
   partnerUpdaterService,
   utils,
   partnerDeleterService,
+  newsService,
 };

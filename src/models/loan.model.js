@@ -18,7 +18,7 @@ const loanSchema = new Schema(
   },
   {
     collection: 'Loan',
-    timestamps: { createdAt: true },
+    timestamps: { createdAt: true, updatedAt: false },
   }
 );
 

@@ -10,11 +10,12 @@ const accountSchema = new Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      unique: true,
     },
   },
   {
     collection: 'Account',
-    timestamps: { createdAt: true },
+    timestamps: { createdAt: true, updatedAt: false },
   }
 );
 
