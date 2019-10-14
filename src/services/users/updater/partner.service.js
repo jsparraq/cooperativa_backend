@@ -15,6 +15,6 @@ exports.acceptPartner = async userId => {
 
   await User.updateOne({ _id: userId }, { $set: { accepted: true } });
   await loanService.createLoan({ value: 800000, accepted: true, userId });
-  await utils.requestPartner(partnersAccepted.email, false);
+  await utils.requestPartner(partnersAccepted.email, true);
   return partnersAccepted;
 };
