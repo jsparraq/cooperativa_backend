@@ -2,6 +2,8 @@ const { UserExisting, User } = require('./index');
 
 exports.handlerError = async err => {
   let customError;
+  // eslint-disable-next-line no-console
+  console.log(err);
   if (err.name === 'MongoError') {
     if (err.code === 11000) {
       if (err.message.includes('User')) {
