@@ -1,5 +1,6 @@
 const { User } = require('../../../models');
-const loanService = require('../../loan/creator/loan.service');
+const loanService = require('../../loan');
+const accountService = require('../../account');
 const utils = require('../../utils/utils');
 
 exports.acceptPartner = async userId => {
@@ -14,7 +15,8 @@ exports.acceptPartner = async userId => {
   const partnersAccepted = await User.findOne({ _id: userId }, usersProjection).then(partner => partner.toJSON());
 
   await User.updateOne({ _id: userId }, { $set: { accepted: true } });
-  await loanService.createLoan({ value: 800000, accepted: true, userId });
+  await loanService.creatorService.createLoan(800000, true, userId);
+  await accountService.creatorService.createAccount(-800000, userId);
   await utils.requestPartner(partnersAccepted.email, true);
   return partnersAccepted;
 };
