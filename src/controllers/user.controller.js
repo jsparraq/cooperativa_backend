@@ -7,6 +7,8 @@ const {
   partnerDeleterService,
 } = require('../services');
 
+const { UserAuth } = require('../errors');
+
 exports.createPartner = async (req, res, next) => {
   const newUser = qs.parse(req.body);
   try {
@@ -59,8 +61,12 @@ exports.login = async (req, res, next) => {
 exports.validateUser = async (req, res, next) => {
   const headers = qs.parse(req.headers);
   try {
-    const response = await userServices.validateUser(headers.authorization.split(' ')[1]);
-    res.send(response);
+    if (headers.authorization === undefined) {
+      throw new UserAuth();
+    } else {
+      const response = await userServices.validateUser(headers.authorization.split(' ')[1]);
+      res.send(response);
+    }
   } catch (err) {
     next(err);
   }
