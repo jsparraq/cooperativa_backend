@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 const { User } = require('../../models');
 const { create } = require('../utils/tokens');
-const { EmailPassWrong } = require('../../errors');
+const { EmailPassWrong, UserNotAccepted } = require('../../errors');
 const { verify } = require('../utils/tokens');
 
 exports.login = async user => {
@@ -11,6 +11,9 @@ exports.login = async user => {
   };
   const userLogin = await User.findOne({ email: user.email }, usersProjection).then(userMongo => userMongo.toJSON());
   const loginSuccess = await bcrypt.compareSync(user.password, userLogin.password);
+  if (!userLogin.accepted) {
+    throw new UserNotAccepted();
+  }
   if (loginSuccess) {
     delete userLogin.password;
     const token = create(userLogin._id);

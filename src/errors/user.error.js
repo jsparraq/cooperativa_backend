@@ -51,10 +51,18 @@ class UserRole extends User {
   }
 }
 
+class UserNotAccepted extends User {
+  constructor() {
+    super("You haven't been accepted", 401, 'Auth Error');
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
 module.exports = {
   UserExisting,
   EmailPassWrong,
   UserAuth,
   User,
   UserRole,
+  UserNotAccepted,
 };
