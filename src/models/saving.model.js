@@ -1,25 +1,32 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-const accountSchema = new Schema(
+const savingSchema = new Schema(
   {
-    value: {
+    solidarityFund: {
       type: Number,
+      require: true,
+    },
+    baseFee: {
+      type: Number,
+      require: true,
+    },
+    bond: {
+      type: String,
       require: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      unique: true,
       ref: 'User',
     },
   },
   {
-    collection: 'Account',
+    collection: 'Saving',
     timestamps: { createdAt: true, updatedAt: false },
   }
 );
 
-const Account = mongoose.model('Account', accountSchema);
+const Saving = mongoose.model('Saving', savingSchema);
 
-module.exports = Account;
+module.exports = Saving;

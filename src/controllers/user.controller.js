@@ -10,10 +10,19 @@ const {
 const { UserAuth } = require('../errors');
 
 exports.createPartner = async (req, res, next) => {
-  const newUser = qs.parse(req.body);
   try {
+    const newUser = qs.parse(req.body);
     const user = await partnerCreatorService.createPartner(newUser);
     res.send(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getPartners = async (_, res, next) => {
+  try {
+    const partners = await partnerReaderService.getPartners();
+    res.send(partners);
   } catch (err) {
     next(err);
   }
@@ -29,8 +38,8 @@ exports.getPartnersNotAccepted = async (_, res, next) => {
 };
 
 exports.acceptPartner = async (req, res, next) => {
-  const partner = qs.parse(req.body);
   try {
+    const partner = qs.parse(req.body);
     const partnersAccepted = await partnerUpdaterService.acceptPartner(partner.userId);
     res.send(partnersAccepted);
   } catch (err) {
@@ -39,8 +48,8 @@ exports.acceptPartner = async (req, res, next) => {
 };
 
 exports.denyPartner = async (req, res, next) => {
-  const partner = qs.parse(req.body);
   try {
+    const partner = qs.parse(req.body);
     const partnersDeny = await partnerDeleterService.denyPartner(partner.userId);
     res.send(partnersDeny);
   } catch (err) {
@@ -49,8 +58,8 @@ exports.denyPartner = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  const user = qs.parse(req.body);
   try {
+    const user = qs.parse(req.body);
     const response = await userServices.login(user);
     res.send(response);
   } catch (err) {
@@ -59,8 +68,8 @@ exports.login = async (req, res, next) => {
 };
 
 exports.validateUser = async (req, res, next) => {
-  const headers = qs.parse(req.headers);
   try {
+    const headers = qs.parse(req.headers);
     if (headers.authorization === undefined) {
       throw new UserAuth();
     } else {

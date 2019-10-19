@@ -1,14 +1,19 @@
 const nodeMailer = require('nodemailer');
 const { emailPassword, email } = require('../../config/config');
+const collections = require('./collectionsNames');
 
 const acceptPartnerTemplate = {
-  subject: 'Tu has sido aceptado',
-  html: '<b>Tu has sido aceptado a la cooperativa</b>',
+  subject: 'You have been accepted',
+  html: '<b>You have been accepted to the co-op</b>',
 };
 
 const denyPartnerTemplate = {
-  subject: 'Tu has sido rechazado',
-  html: '<b>Tu has sido rechazado a la cooperativa</b>',
+  subject: 'You have been rejected',
+  html: '<b>You have been rejected to the co-op</b>',
+};
+
+exports.requestEmail = async (subject, html, toEmail) => {
+  this.sendEmail({ subject, html, to: toEmail });
 };
 
 exports.requestPartner = async (toEmail, accept) => {
@@ -30,4 +35,20 @@ exports.sendEmail = async mailOptions => {
   });
   mailOptions.from = email;
   return transporter.sendMail(mailOptions);
+};
+
+exports.projectQuery = async (stringColection, params) => {
+  let template;
+  if (stringColection === collections.userCollection) {
+    template = collections.templateUser;
+  }
+  params.forEach(param => {
+    template[param] = true;
+  });
+  Object.keys(template).forEach(key => {
+    if (!template[key]) {
+      delete template[key];
+    }
+  });
+  return template;
 };

@@ -6,30 +6,54 @@ const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
 
 // Routes
-const { authRoutes, partnerRoutes, newsRoutes } = require('./routes');
+const { authRoutes, partnerRoutes, newsRoutes, savingsRoutes } = require('./routes');
 
 const app = express();
 
 const { port } = require('./config/config');
 const database = require('./db/DBs');
 
-const errorsLogger = logger('dev', {
-  skip(req) {
-    return req.url === '/' || req.url === '/validateUser';
-  },
-});
+// Logger
+logger.token('status', function(_, res) {
+  const status = res.statusCode;
+  let color;
+  if (status >= 500) {
+    color = 31;
+  } else if (status >= 400) {
+    color = 33;
+  } else if (status >= 300) {
+    color = 36;
+  } else if (status >= 200) {
+    color = 32;
+  } else {
+    color = 0;
+  }
 
-const dateLogger = logger('[:date]', {
-  skip(req) {
-    return req.url === '/' || req.url === '/validateUser';
-  },
+  return `\x1b[${color}m${status}\x1b[0m`;
 });
 
 app.use(helmet());
 
 app
-  .use(dateLogger)
-  .use(errorsLogger)
+  .use(
+    logger(
+      function(tokens, req, res) {
+        return [
+          tokens.date(req, res),
+          tokens.method(req, res),
+          tokens.url(req, res),
+          tokens.status(req, res),
+          tokens['response-time'](req, res),
+          'ms',
+        ].join(' ');
+      },
+      {
+        skip(req) {
+          return req.url === '/';
+        },
+      }
+    )
+  )
   .use(
     bodyParser.json({
       limit: '50mb',
@@ -60,15 +84,15 @@ database
 app.use(partnerRoutes);
 app.use(authRoutes);
 app.use(newsRoutes);
+app.use(savingsRoutes);
 
 app.get('/', function(_, res) {
   res.send('Hello this is the Cooperativa backend');
 });
 
 app.listen(port, function() {
-  const currentDate = new Date();
   // eslint-disable-next-line no-console
-  console.log(`Cooperativa backend app listening on port ${port}! ${currentDate.toLocaleString()}`);
+  console.log(`Cooperativa backend app listening on port ${port}!`);
 });
 
 // catch 404 and forward to error handler

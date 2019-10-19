@@ -2,6 +2,7 @@ const { UserExisting, User } = require('./index');
 
 exports.handlerError = async err => {
   let customError;
+  console.error(err);
   if (err.name === 'MongoError') {
     if (err.code === 11000) {
       if (err.message.includes('User')) {

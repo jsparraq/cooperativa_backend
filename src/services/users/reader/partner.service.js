@@ -1,12 +1,21 @@
 const { User } = require('../../../models');
+const utils = require('../../utils/utils');
+const collections = require('../../utils/collectionsNames');
 
 exports.getPartnersNotAccepted = async () => {
-  const usersProjection = {
-    __v: false,
-    password: false,
-    role: false,
-    accepted: false,
-  };
+  const usersProjection = await utils.projectQuery(collections.userCollection, ['name', 'email', 'createdAt']);
   const partnersNotAccepted = await User.find({ accepted: false, role: 'Partner' }, usersProjection);
   return partnersNotAccepted;
+};
+
+exports.getPartners = async () => {
+  const usersProjection = await utils.projectQuery(collections.userCollection, ['name', 'email']);
+  const partners = await User.find({ accepted: true, role: 'Partner' }, usersProjection);
+  return partners;
+};
+
+exports.getUser = async userId => {
+  const usersProjection = await utils.projectQuery(collections.userCollection, ['role']);
+  const partners = await User.findOne({ _id: userId }, usersProjection);
+  return partners;
 };

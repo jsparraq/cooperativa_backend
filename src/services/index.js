@@ -7,6 +7,7 @@ const {
 } = require('./users');
 
 const newsService = require('./news');
+const savingService = require('./saving');
 const utils = require('./utils/utils');
 
 module.exports = {
@@ -17,4 +18,5 @@ module.exports = {
   utils,
   partnerDeleterService,
   newsService,
+  savingService,
 };
