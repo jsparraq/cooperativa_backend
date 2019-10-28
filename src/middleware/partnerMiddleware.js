@@ -4,8 +4,8 @@ const { partnerReaderService } = require('../services/users/index');
 
 exports.partnerMiddleware = async (req, _, next) => {
   try {
-    const body = qs.parse(req.body);
-    const user = await partnerReaderService.getUser(body.userId);
+    const { userId } = req.params;
+    const user = await partnerReaderService.getUser(userId);
     if (user === null || user.role !== 'Partner') {
       throw new UserRole();
     } else {

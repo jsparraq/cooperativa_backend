@@ -8,9 +8,9 @@ exports.getPartnersNotAccepted = async () => {
   return partnersNotAccepted;
 };
 
-exports.getPartners = async () => {
-  const usersProjection = await utils.projectQuery(collections.userCollection, ['name', 'email']);
-  const partners = await User.find({ accepted: true, role: 'Partner' }, usersProjection);
+exports.getPartners = async query => {
+  const usersProjection = await utils.projectQuery(collections.userCollection, ['name', 'email', 'createdAt']);
+  const partners = await User.find({ role: 'Partner', ...query }, usersProjection);
   return partners;
 };
 

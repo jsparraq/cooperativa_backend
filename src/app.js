@@ -49,7 +49,7 @@ app
       },
       {
         skip(req) {
-          return req.url === '/';
+          return req.url === '/' || req.method === 'OPTIONS';
         },
       }
     )

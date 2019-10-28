@@ -13,25 +13,16 @@ exports.createPartner = async (req, res, next) => {
   try {
     const newUser = qs.parse(req.body);
     const user = await partnerCreatorService.createPartner(newUser);
-    res.send(user);
+    res.status(201).send(user);
   } catch (err) {
     next(err);
   }
 };
 
-exports.getPartners = async (_, res, next) => {
+exports.getPartners = async (req, res, next) => {
   try {
-    const partners = await partnerReaderService.getPartners();
+    const partners = await partnerReaderService.getPartners(req.query);
     res.send(partners);
-  } catch (err) {
-    next(err);
-  }
-};
-
-exports.getPartnersNotAccepted = async (_, res, next) => {
-  try {
-    const partnersNotAccepted = await partnerReaderService.getPartnersNotAccepted();
-    res.send(partnersNotAccepted);
   } catch (err) {
     next(err);
   }
@@ -39,8 +30,7 @@ exports.getPartnersNotAccepted = async (_, res, next) => {
 
 exports.acceptPartner = async (req, res, next) => {
   try {
-    const partner = qs.parse(req.body);
-    const partnersAccepted = await partnerUpdaterService.acceptPartner(partner.userId);
+    const partnersAccepted = await partnerUpdaterService.acceptPartner(req.params.userId);
     res.send(partnersAccepted);
   } catch (err) {
     next(err);
@@ -49,9 +39,8 @@ exports.acceptPartner = async (req, res, next) => {
 
 exports.denyPartner = async (req, res, next) => {
   try {
-    const partner = qs.parse(req.body);
-    const partnersDeny = await partnerDeleterService.denyPartner(partner.userId);
-    res.send(partnersDeny);
+    await partnerDeleterService.denyPartner(req.params.userId);
+    res.status(204).end();
   } catch (err) {
     next(err);
   }

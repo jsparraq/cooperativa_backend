@@ -6,7 +6,7 @@ exports.createNews = async (req, res, next) => {
   const newNews = qs.parse(req.body);
   try {
     const news = await newsService.creatorService.createNews(newNews.text);
-    res.send(news);
+    res.status(201).send(news);
   } catch (err) {
     next(err);
   }

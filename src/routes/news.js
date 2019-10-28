@@ -3,7 +3,7 @@ const news = require('express').Router();
 const { newsController } = require('../controllers');
 const { authMiddleware, adminMiddleware } = require('../middleware');
 
-news.post('/createNews', [authMiddleware, adminMiddleware], newsController.createNews);
-news.get('/getNews', authMiddleware, newsController.getNews);
+news.get('/news', authMiddleware, newsController.getNews);
+news.post('/news', [authMiddleware, adminMiddleware], newsController.createNews);
 
 module.exports = news;
