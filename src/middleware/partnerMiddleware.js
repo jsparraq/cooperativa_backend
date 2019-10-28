@@ -1,4 +1,3 @@
-const qs = require('qs');
 const { UserRole } = require('../errors');
 const { partnerReaderService } = require('../services/users/index');
 
