@@ -11,6 +11,10 @@ const loanSchema = new Schema(
       type: String,
       require: true,
     },
+    date: {
+      type: Date,
+      require: true,
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

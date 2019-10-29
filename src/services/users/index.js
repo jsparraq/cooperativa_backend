@@ -1,13 +1,13 @@
-const userServices = require('./users.service');
-const partnerCreatorService = require('./creator/partner.service');
-const partnerReaderService = require('./reader/partner.service');
-const partnerUpdaterService = require('./updater/partner.service');
-const partnerDeleterService = require('./deleter/partner.service');
+const auth = require('./users.service');
+const partnerCreator = require('./creator/partner.service');
+const partnerReader = require('./reader/partner.service');
+const partnerUpdater = require('./updater/partner.service');
+const partnerDeleter = require('./deleter/partner.service');
 
 module.exports = {
-  userServices,
-  partnerCreatorService,
-  partnerReaderService,
-  partnerUpdaterService,
-  partnerDeleterService,
+  auth,
+  partnerCreator,
+  partnerReader,
+  partnerUpdater,
+  partnerDeleter,
 };

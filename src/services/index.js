@@ -1,22 +1,14 @@
-const {
-  userServices,
-  partnerCreatorService,
-  partnerReaderService,
-  partnerUpdaterService,
-  partnerDeleterService,
-} = require('./users');
+const userService = require('./users');
 
 const newsService = require('./news');
 const savingService = require('./saving');
 const utils = require('./utils/utils');
+const loanService = require('./loan');
 
 module.exports = {
-  userServices,
-  partnerCreatorService,
-  partnerReaderService,
-  partnerUpdaterService,
+  userService,
   utils,
-  partnerDeleterService,
   newsService,
   savingService,
+  loanService,
 };

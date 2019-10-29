@@ -26,10 +26,12 @@ exports.validateUser = async userId => {
   const usersProjection = {
     __v: false,
     password: false,
-    accepted: false,
     createdAt: false,
   };
   const decodedToken = await verify(userId);
   const user = await User.findOne({ _id: decodedToken.sub }, usersProjection);
+  if (!user.accepted) {
+    throw new UserNotAccepted();
+  }
   return user;
 };

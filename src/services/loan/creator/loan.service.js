@@ -1,7 +1,7 @@
 const { Loan } = require('../../../models');
 
-exports.createLoan = async (value, accepted, userId) => {
-  const loan = { value, accepted, userId };
+exports.createLoan = async (value, accepted, userId, date) => {
+  const loan = { value, accepted, userId, date };
   const loanTemp = new Loan(loan);
-  await loanTemp.save();
+  return loanTemp.save().then(() => ({ message: 'Loan created' }));
 };

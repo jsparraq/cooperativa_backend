@@ -15,7 +15,7 @@ exports.getPartners = async query => {
 };
 
 exports.getUser = async userId => {
-  const usersProjection = await utils.projectQuery(collections.userCollection, ['role']);
+  const usersProjection = await utils.projectQuery(collections.userCollection, ['role', 'accepted']);
   const partners = await User.findOne({ _id: userId }, usersProjection);
   return partners;
 };
