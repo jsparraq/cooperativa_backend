@@ -3,16 +3,20 @@ const { Schema } = require('mongoose');
 
 const loanSchema = new Schema(
   {
-    value: {
+    amount: {
       type: Number,
       require: true,
     },
     accepted: {
-      type: String,
+      type: Boolean,
       require: true,
     },
-    date: {
-      type: Date,
+    month: {
+      type: Number,
+      require: true,
+    },
+    year: {
+      type: Number,
       require: true,
     },
     userId: {
@@ -23,7 +27,10 @@ const loanSchema = new Schema(
   },
   {
     collection: 'Loan',
-    timestamps: { createdAt: true, updatedAt: false },
+    timestamps: {
+      createdAt: true,
+      updatedAt: false,
+    },
   }
 );
 
