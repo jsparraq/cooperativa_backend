@@ -1,8 +1,13 @@
 const partner = require('express').Router();
 
 const { loanController } = require('../controllers');
-const { authMiddleware, partnerMiddleware } = require('../middleware');
+const middleware = require('../middleware');
 
-partner.post('/loan/:userId', [authMiddleware, partnerMiddleware], loanController.createLoan);
+partner.post(
+  '/loan/:userId',
+  [middleware.user.userExists, middleware.user.validatePartnerParams],
+  loanController.createLoan
+);
+partner.get('/loan', [middleware.user.userExists, middleware.user.validateAdminHeaders], loanController.createLoan);
 
 module.exports = partner;

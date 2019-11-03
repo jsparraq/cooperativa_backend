@@ -6,7 +6,7 @@ const cors = require('cors');
 const { handlerError } = require('./errors/handlerErrors');
 
 // Routes
-const { authRoutes, partnerRoutes, newsRoutes, savingsRoutes, loanRoutes } = require('./routes');
+const router = require('./routes');
 
 const app = express();
 
@@ -81,11 +81,7 @@ database
     console.error(err);
   });
 
-app.use(partnerRoutes);
-app.use(authRoutes);
-app.use(newsRoutes);
-app.use(savingsRoutes);
-app.use(loanRoutes);
+app.use(router);
 
 app.get('/', function(_, res) {
   res.send('Hello this is the Cooperativa backend');

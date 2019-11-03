@@ -1,5 +1,3 @@
-const { adminMiddleware } = require('./adminMiddleware');
-const { authMiddleware } = require('./authMiddleware');
-const { partnerMiddleware } = require('./partnerMiddleware');
+const user = require('./user.middleware');
 
-module.exports = { adminMiddleware, authMiddleware, partnerMiddleware };
+module.exports = { user };
