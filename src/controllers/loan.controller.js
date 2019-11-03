@@ -11,3 +11,12 @@ exports.createLoan = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getLoans = async (req, res, next) => {
+  try {
+    const loan = await loanService.reader.getLoans(req.query);
+    res.status(200).send(loan);
+  } catch (err) {
+    next(err);
+  }
+};
