@@ -2,6 +2,21 @@ const nodeMailer = require('nodemailer');
 const { emailPassword, email } = require('../../config/config');
 const collections = require('./collectionsNames');
 
+exports.months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const acceptPartnerTemplate = {
   subject: 'You have been accepted',
   html: '<b>You have been accepted to the co-op</b>',

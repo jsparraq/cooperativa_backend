@@ -9,5 +9,15 @@ loan.post(
   loanController.createLoan
 );
 loan.get('/loan', [middleware.user.userExists, middleware.user.validateAdminHeaders], loanController.getLoans);
+loan.put(
+  '/loan/:loanId',
+  [middleware.user.userExists, middleware.user.validateAdminHeaders],
+  loanController.acceptLoan
+);
+loan.delete(
+  '/loan/:loanId',
+  [middleware.user.userExists, middleware.user.validateAdminHeaders],
+  loanController.deleteLoan
+);
 
 module.exports = loan;
