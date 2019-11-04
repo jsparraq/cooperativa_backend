@@ -1,5 +1,5 @@
-const { Loan } = require('../../../models');
-const utils = require('../../utils/utils');
+const { Loan } = require('../../models');
+const utils = require('../utils/utils');
 
 exports.denyLoan = async loanId => {
   const Loans = await Loan.findOne({ _id: loanId }, '-accepted -__v').populate('userId', ['email']);

@@ -1,5 +1,5 @@
-const { Savings, User } = require('../../../models');
-const utils = require('../../utils/utils');
+const { Savings, User } = require('../../models');
+const utils = require('../utils/utils');
 
 exports.createSaving = async (bond, userId) => {
   const saving = { solidarityFund: 1000, baseFee: 30000, bond, userId };

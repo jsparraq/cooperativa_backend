@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt-nodejs');
-const { User } = require('../../../models');
+const { User } = require('../../models');
 
 exports.createPartner = async newUser => {
   const hashPassword = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));

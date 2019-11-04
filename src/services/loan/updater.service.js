@@ -1,4 +1,4 @@
-const { Loan } = require('../../../models');
+const { Loan } = require('../../models');
 
 exports.acceptLoan = async loanId =>
   Loan.updateOne(

@@ -1,5 +1,5 @@
-const { User } = require('../../../models');
-const utils = require('../../utils/utils');
+const { User } = require('../../models');
+const utils = require('../utils/utils');
 
 exports.denyPartner = async userId => {
   const partnerDeny = await User.findOne({ _id: userId }).then(partner => partner.toJSON());

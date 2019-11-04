@@ -1,7 +1,7 @@
-const { User } = require('../../../models');
-const loanService = require('../../loan');
-const accountService = require('../../account');
-const utils = require('../../utils/utils');
+const { User } = require('../../models');
+const loanService = require('../loan');
+const accountService = require('../account');
+const utils = require('../utils/utils');
 
 exports.acceptPartner = async userId => {
   const usersProjection = {

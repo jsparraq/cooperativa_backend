@@ -1,5 +1,5 @@
-const creator = require('./creator/news.service');
-const reader = require('./reader/news.service');
+const creator = require('./creator.service');
+const reader = require('./reader.service');
 
 module.exports = {
   creator,

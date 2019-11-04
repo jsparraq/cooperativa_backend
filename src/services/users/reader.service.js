@@ -1,6 +1,6 @@
-const { User } = require('../../../models');
-const utils = require('../../utils/utils');
-const collections = require('../../utils/collectionsNames');
+const { User } = require('../../models');
+const utils = require('../utils/utils');
+const collections = require('../utils/collectionsNames');
 
 exports.getPartners = async query => {
   const usersProjection = await utils.projectQuery(collections.userCollection, ['name', 'email', 'createdAt']);

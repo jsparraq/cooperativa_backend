@@ -1,8 +1,8 @@
 const auth = require('./users.service');
-const partnerCreator = require('./creator/partner.service');
-const partnerReader = require('./reader/partner.service');
-const partnerUpdater = require('./updater/partner.service');
-const partnerDeleter = require('./deleter/partner.service');
+const partnerCreator = require('./creator.service');
+const partnerReader = require('./reader.service');
+const partnerUpdater = require('./updater.service');
+const partnerDeleter = require('./deleter.service');
 
 module.exports = {
   auth,

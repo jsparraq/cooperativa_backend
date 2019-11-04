@@ -1,4 +1,4 @@
-const { Account } = require('../../../models');
+const { Account } = require('../../models');
 
 exports.createAccount = async (value, userId) => {
   const account = { value, userId };

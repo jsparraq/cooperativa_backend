@@ -1,4 +1,4 @@
-const creatorService = require('./creator/saving.service');
+const creatorService = require('./creator.service');
 
 module.exports = {
   creatorService,

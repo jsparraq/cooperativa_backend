@@ -1,4 +1,4 @@
-const { News } = require('../../../models');
+const { News } = require('../../models');
 
 exports.createNews = async text => {
   const news = { text };
