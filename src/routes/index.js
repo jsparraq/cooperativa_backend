@@ -1,9 +1,9 @@
 const express = require('express');
-const partnerRoutes = require('./partner');
-const authRoutes = require('./auth');
-const newsRoutes = require('./news');
-const savingsRoutes = require('./savings');
-const loanRoutes = require('./loan');
+const partnerRoutes = require('./partner.route');
+const authRoutes = require('./auth.route');
+const newsRoutes = require('./news.route');
+const savingsRoutes = require('./savings.route');
+const loanRoutes = require('./loan.route');
 
 const router = express.Router();
 

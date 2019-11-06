@@ -5,7 +5,6 @@ const savingSchema = new Schema(
   {
     solidarityFund: {
       type: Number,
-      require: true,
     },
     baseFee: {
       type: Number,
