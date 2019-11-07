@@ -11,7 +11,7 @@ const savingSchema = new Schema(
       require: true,
     },
     bond: {
-      type: String,
+      type: Number,
       require: true,
     },
     userId: {
