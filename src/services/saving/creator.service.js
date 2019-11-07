@@ -15,7 +15,7 @@ exports.createSaving = async (bond, baseFee, solidarityFund, userId) => {
     const { email } = await User.findById(userId);
     await utils.requestEmail(
       'You have paid the saving',
-      `<b>You have paid <br /> Solidarity fund: $1.000 <br /> Base fee: $30.000 <br /> Bond: $${bond}</b>`,
+      `<b>You have paid <br /> Solidarity fund: $${solidarityFund} <br /> Base fee: $${baseFee} <br /> Bond: $${bond}</b>`,
       email
     );
     await Account.updateOne({ userId }, { $inc: { value: baseFee } });
