@@ -11,7 +11,7 @@ exports.getFee = async userId => {
     .sort({ createdAt: -1 })
     .limit(1);
   let admin = 0;
-  if (lastFee[0] !== undefined) {
+  if (lastFee.length === 0) {
     admin = loans[0].amount * 0.01;
   }
   const fee = {
