@@ -11,7 +11,7 @@ exports.createFee = async (payment, interest, penalty, admin, loanId) => {
   }
   const fee = { payment, interest, penalty, admin, loanId };
   const feeTemp = new Fee(fee);
-  await feeTemp.save().then(async () => {
+  return feeTemp.save().then(async () => {
     const loan = await Loan.findById(loanId);
     const { email } = await User.findById(loan.userId);
     await Loan.updateOne({ _id: loanId }, { $inc: { amount: -1 * payment } });
@@ -22,5 +22,6 @@ exports.createFee = async (payment, interest, penalty, admin, loanId) => {
         payment} <br /> You have paid <br /> Payment: $${payment} <br /> Interest: $${interest} <br /> Penalty: $${penalty} <br /> Administration: $${admin}</b>`,
       email
     );
+    return { message: 'Fee has been paid successfull' };
   });
 };

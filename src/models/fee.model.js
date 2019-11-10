@@ -17,7 +17,6 @@ const feeSchema = new Schema(
     },
     admin: {
       type: Number,
-      require: true,
     },
     loanId: {
       type: Schema.Types.ObjectId,

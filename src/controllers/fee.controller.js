@@ -10,3 +10,13 @@ exports.createFee = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getFee = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const fee = await feeService.readerService.getFee(userId);
+    res.status(200).send(fee);
+  } catch (err) {
+    next(err);
+  }
+};
