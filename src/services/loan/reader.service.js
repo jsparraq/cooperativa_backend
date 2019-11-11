@@ -18,9 +18,9 @@ exports.getLoan = async loanId => {
       },
     },
   ]);
-  const totalPaid = Fees.filter(fee => fee._id.toJSON() === loanId)[0].totalPaid + loan.amount;
+  const totalAmount = Fees.filter(fee => fee._id.toJSON() === loanId)[0].totalPaid + loan.amount;
   return {
     ...loan,
-    ...{ totalPaid },
+    ...{ totalAmount },
   };
 };
