@@ -15,8 +15,8 @@ exports.getFee = async userId => {
     admin = loans[0].amount * 0.01;
   }
   const fee = {
-    payment: loans[0].amount * 0.12,
-    interest: loans[0].amount * 0.02,
+    payment: Math.ceil(loans[0].amount * 0.12),
+    interest: Math.ceil(loans[0].amount * 0.02),
     admin,
     loanId: loans[0]._id,
     loanAmount: loans[0].amount,
