@@ -20,6 +20,15 @@ exports.getLoans = async (req, res, next) => {
   }
 };
 
+exports.getLoan = async (req, res, next) => {
+  try {
+    const loan = await loanService.reader.getLoan(req.params.loanId);
+    res.status(200).send(loan);
+  } catch (err) {
+    next(err);
+  }
+};
+
 exports.acceptLoan = async (req, res, next) => {
   try {
     const loanAccepted = await loanService.updater.acceptLoan(req.params.loanId);
