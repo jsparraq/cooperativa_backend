@@ -19,7 +19,6 @@ exports.getFee = async userId => {
     interest: Math.ceil(loans[0].amount * 0.02),
     admin,
     loanId: loans[0]._id,
-    loanAmount: loans[0].amount,
   };
   return fee;
 };
