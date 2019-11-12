@@ -6,7 +6,7 @@ exports.getLoans = async query => {
 };
 
 exports.getLoan = async loanId => {
-  const loan = await Loan.findById(loanId, '-__v -createdAt -userId').then(loanTemp => loanTemp.toJSON());
+  const loan = await Loan.findById(loanId, '-__v -createdAt -userId -month -year').then(loanTemp => loanTemp.toJSON());
   if (!loan.accepted) {
     return { message: "This loan hasn't been accepted" };
   }
