@@ -22,3 +22,8 @@ exports.getFee = async userId => {
   };
   return fee;
 };
+
+exports.getFees = async loans => {
+  const loansTemp = loans.map(loan => ({ loanId: loan._id }));
+  return Fee.find({ $or: loansTemp });
+};
